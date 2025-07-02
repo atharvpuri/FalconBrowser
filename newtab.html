@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🦅 Falcon New Tab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0e0e0e 0%, #000000 100%);
+      color: #eeeeee;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffff66;
+      margin-bottom: 10px;
+    }
+
+    .logo h1 {
+      font-size: 2.6em;
+      color: #00ffff;
+      letter-spacing: 2px;
+    }
+
+    #clock {
+      font-size: 1.5em;
+      color: #aaa;
+      margin-top: 10px;
+    }
+
+    .search-bar {
+      margin-top: 35px;
+      width: 60%;
+      max-width: 800px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1em;
+      background-color: #1a1a1a;
+      color: #fff;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 0px transparent;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      box-shadow: 0 0 15px #00ffff80;
+      background-color: #222;
+    }
+
+    .quote {
+      margin-top: 40px;
+      max-width: 70%;
+      text-align: center;
+      font-style: italic;
+      color: #888;
+      font-size: 1em;
+      line-height: 1.5em;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      color: #333;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <img src="assets/icon.jpg" alt="Falcon">
+    <h1>FALCON</h1>
+    <div id="clock">--:--:--</div>
+  </div>
+
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="Enter a website or search query..." />
+  </div>
+
+  <div class="quote" id="quote">“Flying is learning how to throw yourself at the ground and miss.”</div>
+
+  <footer>
+    Falcon Browser - Your custom browser experience
+  </footer>
+
+  <script>
+    // Live Clock
+    const clock = document.getElementById('clock');
+    setInterval(() => {
+      const now = new Date();
+      clock.textContent = now.toLocaleTimeString();
+    }, 1000);
+
+    // Search bar behavior
+    const input = document.getElementById('searchInput');
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        let val = input.value.trim();
+        if (!val) return;
+        if (!val.startsWith('http') && !val.includes('.') && val.split(' ').length > 1) {
+          // Treat as search query
+          val = `https://duckduckgo.com/?q=${encodeURIComponent(val)}`;
+        } else if (!val.startsWith('http')) {
+          val = 'http://' + val;
+        }
+        window.location.href = val;
+      }
+    });
+
+    // Random Quotes
+    const quotes = [
+      "“Flying is learning how to throw yourself at the ground and miss.” – Douglas Adams",
+      "“Your wings already exist. All you have to do is fly.”",
+      "“Rise above the storm and you will find the sunshine.”",
+      "“Sky is not the limit. It’s just the beginning.”",
+      "“The higher you fly, the smaller the world appears.”",
+      "“Built to fly. Programmed to evolve.”",
+      "“Stay grounded, but aim sky high.”"
+    ];
+    document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+  </script>
+</body>
+</html>
