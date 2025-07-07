@@ -110,14 +110,14 @@
   </footer>
 
   <script>
-    // Live Clock
+   
     const clock = document.getElementById('clock');
     setInterval(() => {
       const now = new Date();
       clock.textContent = now.toLocaleTimeString();
     }, 1000);
 
-    // Search bar behavior
+  
     const input = document.getElementById('searchInput');
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
@@ -133,7 +133,7 @@
       }
     });
 
-    // Random Quotes
+    
     const quotes = [
       "“Flying is learning how to throw yourself at the ground and miss.” – Douglas Adams",
       "“Your wings already exist. All you have to do is fly.”",
