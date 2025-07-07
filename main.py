@@ -8,7 +8,7 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QIcon
 
-# Suppress Chromium dev messages
+
 os.environ['QTWEBENGINE_CHROMIUM_FLAGS'] = '--disable-logging --disable-infobars --no-sandbox --disable-gpu'
 os.environ['QTWEBENGINE_DISABLE_SANDBOX'] = '1'
 os.environ['QTWEBENGINE_DISABLE_GPU'] = '1'
@@ -22,10 +22,10 @@ class FalconWindow(QMainWindow):
         self.setWindowTitle("🦅 Falcon Browser")
         self.setGeometry(100, 100, 1400, 900)
 
-        # Set App Icon
+      
         self.setWindowIcon(QIcon("assets/icon.jpg"))
 
-        # Load local homepage (newtab.html)
+
         if getattr(sys, 'frozen', False):
             base_path = sys._MEIPASS
         else:
@@ -33,7 +33,7 @@ class FalconWindow(QMainWindow):
         homepage_path = os.path.join(base_path, "newtab.html")
         self.homepage_path = QUrl.fromLocalFile(homepage_path)
 
-        # UI Styling
+   
         self.setStyleSheet("""
             QMainWindow { background-color: #0d0d0d; }
             QToolBar { background-color: #111; spacing: 10px; padding: 6px; border-bottom: 1px solid #222; }
@@ -75,23 +75,23 @@ class FalconWindow(QMainWindow):
             QStatusBar { background-color: #111; color: #aaa; }
         """)
 
-        # Tabs
+        
         self.tabs = QTabWidget()
         self.tabs.setTabsClosable(True)
         self.tabs.tabCloseRequested.connect(self.close_tab)
         self.setCentralWidget(self.tabs)
 
-        # Toolbar
+     
         self.toolbar = QToolBar("Navigation")
         self.addToolBar(self.toolbar)
         self._create_toolbar_buttons()
 
-        # Status Bar
+       
         self.status_label = QLabel("🦅 Falcon Cyber Mode Active")
         self.status_label.setStyleSheet("color: #00ffff; padding-left: 12px;")
         self.statusBar().addWidget(self.status_label)
 
-        # Initial tab
+    
         self.add_new_tab(self.homepage_path)
 
     def _create_toolbar_buttons(self):
